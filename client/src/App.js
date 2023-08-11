@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>ChatGPT Integration</h1>
+        <h1 className="App-heading">Byte-sized Learning</h1>
         <ChatGPT />
       </header>
     </div>

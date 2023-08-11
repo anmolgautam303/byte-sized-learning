@@ -21,17 +21,13 @@ app.post("/chat", async (req, res) => {
   const { prompt } = req.body;
 
   try {
-    // Generate a response with ChatGPT
-    const completion = await openai.createCompletion({
-      engine: 'text-davinci-002',
-      prompt: prompt,
-      max_tokens: 50,
-      n: 1,
-      stop: null,
-      temperature: 0.5,
+    const chatCompletion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo-16k-0613",
+      messages: [{role: "user", content: prompt}],
+      temperature: .8,
     });
-    // res.send(completion.data.choices[0].text);
-    res.json({ text: completion.data.choices[0].text });
+
+    res.status(200).json({ result: chatCompletion?.data?.choices[0]?.message?.content });
   } catch (error) {
     console.error('error anmol', error);
     res.status(500).json({ error: error });
